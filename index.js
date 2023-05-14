@@ -86,8 +86,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     $(document).on("pagebeforeshow", "#details", function (event) {
     let localID = localStorage.getItem('parm');
-
-    console.log('localID:', localID);
     
     // next step to avoid bug in jQuery Mobile, force the student array to be current
     studentArray = JSON.parse(localStorage.getItem('studentArray'));
@@ -95,7 +93,7 @@ document.addEventListener("DOMContentLoaded", function () {
         
     console.log(studentArray[localID - 1]);
     
-    document.getElementById("oneStudentID").innerHTML = "Student ID: " + studentArray[localID - 1].ID;
+    //document.getElementById("oneStudentID").innerHTML = "Student ID: " + studentArray[localID - 1].ID;
     document.getElementById("oneName").innerHTML = "The Student Name: " + studentArray[localID - 1].StudentName;
     document.getElementById("oneAge").innerHTML = "The Student Age: " + studentArray[localID - 1].Age;
     document.getElementById("oneMajor").innerHTML = "Major is " + studentArray[localID - 1].Major;
