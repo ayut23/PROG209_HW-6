@@ -17,9 +17,9 @@ let StudentObject = function (pID, pStudentName, pAge, pMajor, pEducation, pGrad
 
 
 studentArray.push(new StudentObject(1, "Khant Nyunt", 24, "Computer Science", "Bachelor's Degree", "2025", "https://www.linkedin.com/in/khant-nyunt-940aba206/"));
-studentArray.push(new StudentObject(2, "Justin", 21, "Computer Science", "Associate Degree", "2027", "https://www.linkedin.com/in/khant-nyunt-940aba206/"));
-studentArray.push(new StudentObject(3, "Sarah", 21, "Computer Science", "Certificate", "2024", "https://www.linkedin.com/in/khant-nyunt-940aba206/"));
-studentArray.push(new StudentObject(4, "John", 20, "Computer Science", "Bachelor's Degree", "2023", "https://www.linkedin.com/in/khant-nyunt-940aba206/"));
+studentArray.push(new StudentObject(2, "Justin", 21, "Digital Marketing", "Associate Degree", "2027", "https://www.linkedin.com/in/khant-nyunt-940aba206/"));
+studentArray.push(new StudentObject(3, "Sarah", 21, "Business Management", "Certificate", "2024", "https://www.linkedin.com/in/khant-nyunt-940aba206/"));
+studentArray.push(new StudentObject(4, "John", 20, "Accounting", "Bachelor's Degree", "2023", "https://www.linkedin.com/in/khant-nyunt-940aba206/"));
 
 
 
@@ -45,19 +45,19 @@ document.addEventListener("DOMContentLoaded", function () {
         // also add the URL value
     });
 
-    $(document).ready(() => {
-        $("#photo").change(function () {
-            const file = this.files[0];
-            if (file) {
-                let reader = new FileReader();
-                reader.onload = function (event) {
-                    $("#imgPreview")
-                      .attr("src", event.target.result);
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-    });
+    // $(document).ready(() => {
+    //     $("#photo").change(function () {
+    //         const file = this.files[0];
+    //         if (file) {
+    //             let reader = new FileReader();
+    //             reader.onload = function (event) {
+    //                 $("#imgPreview")
+    //                   .attr("src", event.target.result);
+    //             };
+    //             reader.readAsDataURL(file);
+    //         }
+    //     });
+    // });
 
     console.log(studentArray);
     document.getElementById("buttonClear").addEventListener("click", function () {
@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     document.getElementById("buttonSortName").addEventListener("click", function () {
-        studentArray.sort(dynamicSort("Name"));
+        studentArray.sort(dynamicSort("StudentName"));
         createList();
         document.location.href = "index.html#ListAll";
     });
@@ -106,9 +106,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // next step to avoid bug in jQuery Mobile, force the student array to be current
     studentArray = JSON.parse(localStorage.getItem('studentArray'));
     //let pointer = GetArrayPointer(localID);
-        
-    console.log(studentArray[localID - 1]);
-    console.log(studentArray[localID]);
+
     
     //document.getElementById("oneStudentID").innerHTML = "Student ID: " + studentArray[localID - 1].ID;
     document.getElementById("oneName").innerHTML = "The Student Name: " + studentArray[localID - 1].StudentName;
