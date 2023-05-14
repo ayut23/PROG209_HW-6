@@ -45,6 +45,20 @@ document.addEventListener("DOMContentLoaded", function () {
         // also add the URL value
     });
 
+    $(document).ready(() => {
+        $("#photo").change(function () {
+            const file = this.files[0];
+            if (file) {
+                let reader = new FileReader();
+                reader.onload = function (event) {
+                    $("#imgPreview")
+                      .attr("src", event.target.result);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    });
+
     console.log(studentArray);
     document.getElementById("buttonClear").addEventListener("click", function () {
         document.getElementById("name").value = "";
