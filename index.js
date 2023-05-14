@@ -2,9 +2,8 @@
 let studentArray = [];
 
 // define a constructor to create student objects
-let StudentObject = function (pID, pStudentID, pStudentName, pAge, pMajor, pEducation, pGraduation, pURL) {
+let StudentObject = function (pID, pStudentName, pAge, pMajor, pEducation, pGraduation, pURL) {
     this.ID = pID;
-    this.StudentID = pStudentID;
     this.StudentName = pStudentName;
     this.Age = pAge;
     this.ID = studentArray.length + 1;
@@ -17,10 +16,10 @@ let StudentObject = function (pID, pStudentID, pStudentName, pAge, pMajor, pEduc
 }
 
 
-studentArray.push(new StudentObject(1, "123456", "Khant Nyunt", 24, "Computer Science", "Bachelor's Degree", "2025", "https://www.linkedin.com/in/khant-nyunt-940aba206/"));
-studentArray.push(new StudentObject(2, "342567", "Justin", 21, "Computer Science", "Associate Degree", "2027", "https://www.linkedin.com/in/khant-nyunt-940aba206/"));
-studentArray.push(new StudentObject(3, "547399", "Sarah", 21, "Computer Science", "Certificate", "2024", "https://www.linkedin.com/in/khant-nyunt-940aba206/"));
-studentArray.push(new StudentObject(4, "554663", "John", 20, "Computer Science", "Bachelor's Degree", "2023", "https://www.linkedin.com/in/khant-nyunt-940aba206/"));
+studentArray.push(new StudentObject(1, "Khant Nyunt", 24, "Computer Science", "Bachelor's Degree", "2025", "https://www.linkedin.com/in/khant-nyunt-940aba206/"));
+studentArray.push(new StudentObject(2, "Justin", 21, "Computer Science", "Associate Degree", "2027", "https://www.linkedin.com/in/khant-nyunt-940aba206/"));
+studentArray.push(new StudentObject(3, "Sarah", 21, "Computer Science", "Certificate", "2024", "https://www.linkedin.com/in/khant-nyunt-940aba206/"));
+studentArray.push(new StudentObject(4, "John", 20, "Computer Science", "Bachelor's Degree", "2023", "https://www.linkedin.com/in/khant-nyunt-940aba206/"));
 
 
 
@@ -34,8 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // add button events ************************************************************************
     
     document.getElementById("buttonAdd").addEventListener("click", function () {
-        studentArray.push(new StudentObject(document.getElementById("studentID").value,
-        document.getElementById("name").value,
+        studentArray.push(new StudentObject(document.getElementById("name").value,
         document.getElementById("age").value,
         selectedMajor,
         document.getElementById("education").value,
@@ -88,13 +86,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
     $(document).on("pagebeforeshow", "#details", function (event) {
     let localID = localStorage.getItem('parm');
+
+    console.log('localID:', localID);
     
     // next step to avoid bug in jQuery Mobile, force the student array to be current
-    studentArray = JSON.parse(localStorage.getItem('studentArray')); 
+    studentArray = JSON.parse(localStorage.getItem('studentArray'));
+    //let pointer = GetArrayPointer(localID);
         
     console.log(studentArray[localID - 1]);
     
-    document.getElementById("oneStudentID").innerHTML = "Student ID: " + studentArray[localID - 1].StudentID;
+    document.getElementById("oneStudentID").innerHTML = "Student ID: " + studentArray[localID - 1].ID;
     document.getElementById("oneName").innerHTML = "The Student Name: " + studentArray[localID - 1].StudentName;
     document.getElementById("oneAge").innerHTML = "The Student Age: " + studentArray[localID - 1].Age;
     document.getElementById("oneMajor").innerHTML = "Major is " + studentArray[localID - 1].Major;
@@ -177,10 +178,10 @@ function dynamicSort(property) {
 }
 
 // cycles thru the array to find the array element with a matching ID
-function GetArrayPointer(localID) {
-    for (let i = 0; i < studentArray.length; i++) {
-        if (localID === studentArray[i].ID) {
-            return i;
-        }
-    }
-}
+// function GetArrayPointer(localID) {
+//     for (let i = 0; i < studentArray.length; i++) {
+//         if (localID === studentArray[i].ID) {
+//             return i;
+//         }
+//     }
+// }
