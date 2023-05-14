@@ -1,35 +1,31 @@
 // start by creating data so we don't have to type it in each time
-let movieArray = [];
+let studentArray = [];
 
-// define a constructor to create movie objects
-let MovieObject = function (pTitle, pYear, pGenre, pMan, pWoman, pURL) {
-    
-    this.Title = pTitle;
-    this.Year = pYear;
-   // this.ID = movieArray.length + 1;
-    this.ID = Math.random().toString(16).slice(5) 
+// define a constructor to create student objects
+let StudentObject = function (pID, pStudentID, pStudentName, pAge, pMajor, pEducation, pGraduation, pURL) {
+    this.ID = pID;
+    this.StudentID = pStudentID;
+    this.StudentName = pStudentName;
+    this.Age = pAge;
+    this.ID = studentArray.length + 1;
+    //this.ID = Math.random().toString(16).slice(5);
     //this.ID = Math.floor((Math.random() * 100) + 1);// tiny chance could get duplicates!
-    this.Genre = pGenre;  // action  comedy  drama  horrow scifi  musical  western
-    this.Man = pMan;
-    this.Woman = pWoman;
+    this.Major = pMajor;  // computer science, nursing, etc.
+    this.Education = pEducation;
+    this.Graduation = pGraduation;
     this.URL = pURL;
 }
 
-/*
-movieArray.push(new MovieObject("Moonstruck", 1981, "Drama", "Nicholas Cage", "Cher", "https://www.youtube.com/watch?v=M01_2CKL6PU"));
-movieArray.push(new MovieObject("Wild At Heart", 1982, "Drama", "Nicholas Cage", "Laura VanDern", "https://www.youtube.com/watch?v=7uRJartX79Q"));
-movieArray.push(new MovieObject("Raising Arizona", 1983, "Comedy", "Nicholas Cage", "Holly Hunter", "https://www.youtube.com/watch?v=NoXJKArYi1g"));
-movieArray.push(new MovieObject("USS Indianapolis: Men of Courage", 2016, "Drama", "Nicholas Cage", "Emily Tennant", "https://youtu.be/ZDPE-NronKk")); */
 
-movieArray.push(new MovieObject("Khant Nyunt", 24, "Computer Science", "Bachelor's Degree", "2025", "https://www.linkedin.com/in/khant-nyunt-940aba206/"));
-movieArray.push(new MovieObject("Justin", 21, "Computer Science", "Associate Degree", "2027", "https://www.linkedin.com/in/khant-nyunt-940aba206/"));
-movieArray.push(new MovieObject("Sarah", 21, "Computer Science", "Certificate", "2024", "https://www.linkedin.com/in/khant-nyunt-940aba206/"));
-movieArray.push(new MovieObject("John", 20, "Computer Science", "Bachelor's Degree", "2023", "https://www.linkedin.com/in/khant-nyunt-940aba206/"));
+studentArray.push(new StudentObject(1, "123456", "Khant Nyunt", 24, "Computer Science", "Bachelor's Degree", "2025", "https://www.linkedin.com/in/khant-nyunt-940aba206/"));
+studentArray.push(new StudentObject(2, "342567", "Justin", 21, "Computer Science", "Associate Degree", "2027", "https://www.linkedin.com/in/khant-nyunt-940aba206/"));
+studentArray.push(new StudentObject(3, "547399", "Sarah", 21, "Computer Science", "Certificate", "2024", "https://www.linkedin.com/in/khant-nyunt-940aba206/"));
+studentArray.push(new StudentObject(4, "554663", "John", 20, "Computer Science", "Bachelor's Degree", "2023", "https://www.linkedin.com/in/khant-nyunt-940aba206/"));
 
 
 
 
-let selectedGenre = "not selected";
+let selectedMajor = "not selected";
 
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -38,44 +34,45 @@ document.addEventListener("DOMContentLoaded", function () {
 // add button events ************************************************************************
     
     document.getElementById("buttonAdd").addEventListener("click", function () {
-        movieArray.push(new MovieObject(document.getElementById("title").value, 
-        document.getElementById("year").value,
-        selectedGenre,
-        document.getElementById("man").value,
-        document.getElementById("woman").value,
-        movieArray.length,  // set ID
+        studentArray.push(new StudentObject(document.getElementById("studentID").value,
+        document.getElementById("name").value,
+        document.getElementById("age").value,
+        selectedMajor,
+        document.getElementById("education").value,
+        document.getElementById("graduation").value,
+        studentArray.length,  // set ID
         document.getElementById("URL").value));
         document.location.href = "index.html#ListAll";
         // also add the URL value
     });
-    
+
     document.getElementById("buttonClear").addEventListener("click", function () {
-        document.getElementById("title").value = "";
-        document.getElementById("year").value = "";
+        document.getElementById("name").value = "";
+        document.getElementById("age").value = "";
         document.getElementById("man").value = "";
         document.getElementById("woman").value = "";
         document.getElementById("URL").value = "";
     });
 
-    $(document).bind("change", "#select-genre", function (event, ui) {
-        selectedGenre = $('#select-genre').val();
+    $(document).bind("change", "#select-major", function (event, ui) {
+        selectedMajor = $('#select-major').val();
     });
 
 
-    document.getElementById("buttonSortTitle").addEventListener("click", function () {
-        movieArray.sort(dynamicSort("Title"));
+    document.getElementById("buttonSortName").addEventListener("click", function () {
+        studentArray.sort(dynamicSort("Name"));
         createList();
         document.location.href = "index.html#ListAll";
     });
 
-    document.getElementById("buttonSortGenre").addEventListener("click", function () {
-        movieArray.sort(dynamicSort("Genre"));
+    document.getElementById("buttonSortMajor").addEventListener("click", function () {
+        studentArray.sort(dynamicSort("Major"));
         createList();
         document.location.href = "index.html#ListAll";
     });
 
-    // button on details page to view the youtube video
-    document.getElementById("trailer").addEventListener("click", function () {
+    // button on details page to view the CTC account
+    document.getElementById("CTClink").addEventListener("click", function () {
         window.open(document.getElementById("oneURL").innerHTML);
     });
 // end of add button events ************************************************************************
@@ -83,24 +80,28 @@ document.addEventListener("DOMContentLoaded", function () {
   
   
 // page before show code
-$(document).on("pagebeforeshow", "#details", function (event) {
+
+    $(document).on("pagebeforeshow", "#ListAll", function (event) {   // have to use jQuery 
+        createList();
+    });
+
+
+    $(document).on("pagebeforeshow", "#details", function (event) {
     let localID = localStorage.getItem('parm');
     
-    console.log('localID:', localID);
+    // next step to avoid bug in jQuery Mobile, force the student array to be current
+    studentArray = JSON.parse(localStorage.getItem('studentArray')); 
+        
+    console.log(studentArray[localID - 1]);
     
-    // next step to avoid bug in jQuery Mobile, force the movie array to be current
-    movieArray = JSON.parse(localStorage.getItem('movieArray')); 
-    let pointer = GetArrayPointer(localID);
-    
-    console.log('pointer:', pointer);
-    
-    document.getElementById("oneTitle").innerHTML = "The Student Name: " + movieArray[pointer].Title;
-    document.getElementById("oneYear").innerHTML = "The Student Age: " + movieArray[pointer].Year;
-    document.getElementById("oneGenre").innerHTML = "Major is " + movieArray[pointer].Genre;
-    document.getElementById("oneWoman").innerHTML = "Education Level: " + movieArray[pointer].Woman;
-    document.getElementById("oneMan").innerHTML = "Expected Graduation Year: " + movieArray[pointer].Man;
-    document.getElementById("oneURL").innerHTML = movieArray[pointer].URL;
-  });
+    document.getElementById("oneStudentID").innerHTML = "Student ID: " + studentArray[localID - 1].StudentID;
+    document.getElementById("oneName").innerHTML = "The Student Name: " + studentArray[localID - 1].StudentName;
+    document.getElementById("oneAge").innerHTML = "The Student Age: " + studentArray[localID - 1].Age;
+    document.getElementById("oneMajor").innerHTML = "Major is " + studentArray[localID - 1].Major;
+    document.getElementById("oneEducation").innerHTML = "Education Level: " + studentArray[localID - 1].Education;
+    document.getElementById("oneGraduation").innerHTML = "Expected Graduation Year: " + studentArray[localID - 1].Graduation;
+    document.getElementById("oneURL").innerHTML = studentArray[localID - 1].URL;
+    });
 // end of page before show code *************************************************************************
 
 });  
@@ -108,18 +109,18 @@ $(document).on("pagebeforeshow", "#details", function (event) {
 
 function createList() {
     // clear prior data
-   let myUL =document.getElementById("MovieListul");
+   let myUL =document.getElementById("StudentListul");
    myUL.innerHTML = "";
    
 
-    movieArray.forEach(function (oneMovie) {   // use handy array forEach method
+   studentArray.forEach(function (oneStudent) {   // use handy array forEach method
         var myLi = document.createElement('li');
         // adding a class name to each one as a way of creating a collection
-        myLi.classList.add('oneMovie'); 
+        myLi.classList.add('oneStudent'); 
         // use the html5 "data-parm" to encode the ID of this particular data object
         // that we are building an li from
-        myLi.setAttribute("data-parm", oneMovie.ID);
-        myLi.innerHTML = " Student ID: "+ oneMovie.ID + ":     "+"  "+ oneMovie.Title + "    : enrolled in        " +"   "+ oneMovie.Genre + "    "+"    Programs ";
+        myLi.setAttribute("data-parm", oneStudent.ID);
+        myLi.innerHTML = oneStudent.ID + ". " + oneStudent.StudentName + ", enrolled in" + "   "+ oneStudent.Major;
         myUL.appendChild(myLi);
     });
    
@@ -127,9 +128,9 @@ function createList() {
     // now we have the HTML done to display out list, 
     // next we make them active buttons
     // set up an event for each new li item, 
-    var liList = document.getElementsByClassName("oneMovie");
-    let newMoviewArray = Array.from(liList);
-    newMoviewArray.forEach(function (element) {
+    var liList = document.getElementsByClassName("oneStudent");
+    let newStudentArray = Array.from(liList);
+    newStudentArray.forEach(function (element) {
         element.addEventListener('click', function () {
         // get that data-parm we added for THIS particular li as we loop thru them
         var parm = this.getAttribute("data-parm");  // passing in the record.Id
@@ -139,9 +140,9 @@ function createList() {
        
        
         // but also, to get around a "bug" in jQuery Mobile, take a snapshot of the
-        // current movie array and save it to localStorage as well.
-        let stringMovieArray = JSON.stringify(movieArray); // convert array to "string"
-        localStorage.setItem('movieArray', stringMovieArray);
+        // current student array and save it to localStorage as well.
+        let stringSudentArray = JSON.stringify(studentArray); // convert array to "string"
+        localStorage.setItem('studentArray', stringSudentArray);
         
         
         // now jump to our page that will use that one item
@@ -177,8 +178,8 @@ function dynamicSort(property) {
 
 // cycles thru the array to find the array element with a matching ID
 function GetArrayPointer(localID) {
-    for (let i = 0; i < movieArray.length; i++) {
-        if (localID === movieArray[i].ID) {
+    for (let i = 0; i < studentArray.length; i++) {
+        if (localID === studentArray[i].ID) {
             return i;
         }
     }

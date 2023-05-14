@@ -23,7 +23,7 @@
 
     <!--   page header -->
     <div data-role="header" data-theme='a'>
-      <h1>My Student</h1>
+      <h1>Student</h1>
 <div data-role="navbar" data-theme='b'>
   <ul>
     <li><a href="#home">Home Page</a></li>
@@ -36,13 +36,13 @@
     <!--   page content -->
     <div data-role="content" data-theme='b'>
       <div class="newFont">
-        <h2> Student Information Management System</h2>
+        <h2 id = "Title"> Student Information Management System</h2>
       </div>
     </div>
 
     <!--  page footer -->
     <div data-role="footer" data-theme='b'>
-      <h1>Copyright 2023 by Ayub</h1>
+      <h1>Copyright 2023 by Ayub and Maria</h1>
     </div>
   </div>
   <!-- End of  page ------------------------------------------------------------------>
@@ -68,18 +68,19 @@
     <!--  content -->
     <div data-role="content" data-theme='c'>
       <p> Here are the details</p>
-      <p id="oneTitle"></p>
-      <p id="oneYear"></p>
-      <p id="oneGenre"></p>
-      <p id="oneWoman"></p>
-      <p id="oneMan"></p>
+      <p id="oneStudentID"></p>
+      <p id="oneName"></p>
+      <p id="oneAge"></p>
+      <p id="oneMajor"></p>
+      <p id="oneEducation"></p>
+      <p id="oneGraduation"></p>
       <p id="oneURL" hidden></p>
-      <input type="button" value="Trailer" id="trailer" />
+      <input type="button" value="CTClink" id="CTClink" />
     </div>
   
     <!--    footer -->
     <div data-role="footer" data-theme='b'>
-      <h1>Copyright 2023 by Ayub</h1>
+      <h1>Copyright 2023 by Ayub and Maria</h1>
     </div>
   
   </div>
@@ -89,7 +90,7 @@
   <div data-role="page" id="Load">
     <!--  page header -->
     <div data-role="header" data-theme='a'>
-      <h1>Add a Movie</h1>
+      <h1>Add a new Student</h1>
       <div data-role="navbar" data-theme='b'>
         <ul>
           <li><a href="#home">Home Page</a></li>
@@ -107,20 +108,22 @@
   
     <div data-role="content" data-theme='c'>
       <h2>Enter a new Student</h2>
+      Student ID <br />
+      <input type="text" value="" id="studentID" />
       Enter Student name <br />
-      <input type="text" value="" id="title" />
+      <input type="text" value="" id="name" />
       Enter Student Age <br />
-      <input type="text" value="" id="year" />
+      <input type="text" value="" id="age" />
       Enter Student Educational Level  <br />
-      <input type="text" value="" id="man" />
+      <input type="text" value="" id="education" />
       Enter expected graduation year <br />
-      <input type="text" value="" id="woman" />
+      <input type="text" value="" id="graduation" />
       Enter ctc link <br />
       <input type="text" value="" id="URL" />
       
         <div class="ui-field-contain">
-          <label for="select-genre">Select a Major</label>
-          <select name="select-genre" id="select-genre">
+          <label for="select-major">Select a Major</label>
+          <select name="select-major" id="select-major">
             <option value="Computer Science">Computer Science</option> <!-- same as value before-->
             <option value="Nursing">Nursing</option>
             <option value="Digital Marketing">Digital Marketing</option>
@@ -145,7 +148,7 @@
     
     <!--   page footer -->
     <div data-role="footer" data-theme='b'>
-      <h1>Copyright 2023 by Ayub</h1>
+      <h1>Copyright 2023 by Ayub and Maria</h1>
     </div>
   </div>
   <!-- End of  page ------------------------------------------------------------------>
@@ -155,7 +158,7 @@
   <div data-role="page" id="ListAll">
     <!--   page header -->
     <div data-role="header" data-theme='a'>
-      <h1>My Movie List</h1>
+      <h1>Students List</h1>
       <div data-role="navbar" data-theme='b'>
         <ul>
           <li><a href="#home">Home Page</a></li>
@@ -170,19 +173,19 @@
       <div class="container">
       <p> Here are My Students</p>
       <div>
-        <ul id="MovieListul"></ul>
+        <ul id="StudentListul"></ul>
       </div>
       </div>
       <div class="container">
-      <input type="button" value="Sort By Major" id="buttonSortGenre" data-inline="true" />
-      <input type="button" value="Sort By Name" id="buttonSortTitle" data-inline="true" />
+      <input type="button" value="Sort By Major" id="buttonSortMajor" data-inline="true" />
+      <input type="button" value="Sort By Name" id="buttonSortName" data-inline="true" />
       </div>
     </div>
 
 
     <!--   page footer -->
     <div data-role="footer" data-theme='b'>
-      <h1>Copyright 2023 by Ayub</h1>
+      <h1>Copyright 2023 by Ayub and Maria</h1>
     </div>
   </div>
   </div>
