@@ -33,7 +33,8 @@ document.addEventListener("DOMContentLoaded", function () {
 // add button events ************************************************************************
     
     document.getElementById("buttonAdd").addEventListener("click", function () {
-        studentArray.push(new StudentObject(document.getElementById("name").value,
+        studentArray.push(new StudentObject(studentArray.ID,
+        document.getElementById("name").value,
         document.getElementById("age").value,
         selectedMajor,
         document.getElementById("education").value,
@@ -44,6 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // also add the URL value
     });
 
+    console.log(studentArray);
     document.getElementById("buttonClear").addEventListener("click", function () {
         document.getElementById("name").value = "";
         document.getElementById("age").value = "";
@@ -92,6 +94,7 @@ document.addEventListener("DOMContentLoaded", function () {
     //let pointer = GetArrayPointer(localID);
         
     console.log(studentArray[localID - 1]);
+    console.log(studentArray[localID]);
     
     //document.getElementById("oneStudentID").innerHTML = "Student ID: " + studentArray[localID - 1].ID;
     document.getElementById("oneName").innerHTML = "The Student Name: " + studentArray[localID - 1].StudentName;
