@@ -2,13 +2,12 @@
 let studentArray = [];
 
 // define a constructor to create student objects
-let StudentObject = function (pID, pStudentName, pAge, pMajor, pEducation, pGraduation, pURL) {
-    this.ID = pID;
+let StudentObject = function (pStudentName, pAge, pMajor, pEducation, pGraduation, pURL) {
+
     this.StudentName = pStudentName;
     this.Age = pAge;
     //this.ID = studentArray.length + 1;
     this.ID = Math.random().toString(16).slice(5);
-    //this.ID = Math.floor((Math.random() * 100) + 1);// tiny chance could get duplicates!
     this.Major = pMajor;  // computer science, nursing, etc.
     this.Education = pEducation;
     this.Graduation = pGraduation;
@@ -16,10 +15,10 @@ let StudentObject = function (pID, pStudentName, pAge, pMajor, pEducation, pGrad
 }
 
 
-studentArray.push(new StudentObject(1, "Khant Nyunt", 24, "Computer Science", "Bachelor's Degree", "2025", "https://www.linkedin.com/in/khant-nyunt-940aba206/"));
-studentArray.push(new StudentObject(2, "Justin", 21, "Digital Marketing", "Associate Degree", "2027", "https://www.linkedin.com/in/khant-nyunt-940aba206/"));
-studentArray.push(new StudentObject(3, "Sarah", 21, "Business Management", "Certificate", "2024", "https://www.linkedin.com/in/khant-nyunt-940aba206/"));
-studentArray.push(new StudentObject(4, "John", 20, "Accounting", "Bachelor's Degree", "2023", "https://www.linkedin.com/in/khant-nyunt-940aba206/"));
+studentArray.push(new StudentObject("Khant Nyunt", 24, "Computer Science", "Bachelor's Degree", "2025", "https://www.linkedin.com/in/khant-nyunt-940aba206/"));
+studentArray.push(new StudentObject("Justin", 21, "Digital Marketing", "Associate Degree", "2027", "https://www.linkedin.com/in/khant-nyunt-940aba206/"));
+studentArray.push(new StudentObject("Sarah", 21, "Business Management", "Certificate", "2024", "https://www.linkedin.com/in/khant-nyunt-940aba206/"));
+studentArray.push(new StudentObject("John", 20, "Accounting", "Bachelor's Degree", "2023", "https://www.linkedin.com/in/khant-nyunt-940aba206/"));
 
 
 
@@ -33,8 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // add button events ************************************************************************
     
     document.getElementById("buttonAdd").addEventListener("click", function () {
-        studentArray.push(new StudentObject(studentArray.ID,
-        document.getElementById("name").value,
+        studentArray.push(new StudentObject(document.getElementById("name").value,
         document.getElementById("age").value,
         selectedMajor,
         document.getElementById("education").value,
@@ -59,7 +57,6 @@ document.addEventListener("DOMContentLoaded", function () {
     //     });
     // });
 
-    console.log(studentArray);
     document.getElementById("buttonClear").addEventListener("click", function () {
         document.getElementById("name").value = "";
         document.getElementById("age").value = "";
@@ -105,16 +102,15 @@ document.addEventListener("DOMContentLoaded", function () {
     
     // next step to avoid bug in jQuery Mobile, force the student array to be current
     studentArray = JSON.parse(localStorage.getItem('studentArray'));
-    //let pointer = GetArrayPointer(localID);
+    let pointer = GetArrayPointer(localID);
 
     
-    //document.getElementById("oneStudentID").innerHTML = "Student ID: " + studentArray[localID - 1].ID;
-    document.getElementById("oneName").innerHTML = "The Student Name: " + studentArray[localID - 1].StudentName;
-    document.getElementById("oneAge").innerHTML = "The Student Age: " + studentArray[localID - 1].Age;
-    document.getElementById("oneMajor").innerHTML = "Major is " + studentArray[localID - 1].Major;
-    document.getElementById("oneEducation").innerHTML = "Education Level: " + studentArray[localID - 1].Education;
-    document.getElementById("oneGraduation").innerHTML = "Expected Graduation Year: " + studentArray[localID - 1].Graduation;
-    document.getElementById("oneURL").innerHTML = studentArray[localID - 1].URL;
+    document.getElementById("oneName").innerHTML = "The Student Name: " + studentArray[pointer].StudentName;
+    document.getElementById("oneAge").innerHTML = "The Student Age: " + studentArray[pointer].Age;
+    document.getElementById("oneMajor").innerHTML = "Major is " + studentArray[pointer].Major;
+    document.getElementById("oneEducation").innerHTML = "Education Level: " + studentArray[pointer].Education;
+    document.getElementById("oneGraduation").innerHTML = "Expected Graduation Year: " + studentArray[pointer].Graduation;
+    document.getElementById("oneURL").innerHTML = studentArray[pointer].URL;
     });
 // end of page before show code *************************************************************************
 
@@ -123,7 +119,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function createList() {
     // clear prior data
-   let myUL =document.getElementById("StudentListul");
+   let myUL = document.getElementById("StudentListul");
    myUL.innerHTML = "";
    
 
@@ -191,10 +187,10 @@ function dynamicSort(property) {
 }
 
 // cycles thru the array to find the array element with a matching ID
-// function GetArrayPointer(localID) {
-//     for (let i = 0; i < studentArray.length; i++) {
-//         if (localID === studentArray[i].ID) {
-//             return i;
-//         }
-//     }
-// }
+function GetArrayPointer(localID) {
+    for (let i = 0; i < studentArray.length; i++) {
+        if (localID === studentArray[i].ID) {
+            return i;
+        }
+    }
+}
