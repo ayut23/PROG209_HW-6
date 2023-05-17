@@ -10,15 +10,45 @@ h1 {
   font-weight:    bold;
   color:  rgb(218, 233, 255);
 }
-.container{
+
+.containers{
  display: flex;
  justify-content: center;
  align-content: center;
  /*height: 100vh;*/
 }
 
+
 #Title {
   text-align: center;
+}
+
+
+
+
+
+/*Div right*/
+#container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.conSearch,
+.btnsearch {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#container-btn {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+#search {
+  display: flex;
+  margin-left: 10px;
 }
 
 /* .holder {

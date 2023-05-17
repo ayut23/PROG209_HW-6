@@ -25,10 +25,13 @@ studentArray.push(new StudentObject("John", 20, "Accounting", "Bachelor's Degree
 
 let selectedMajor = "not selected";
 
+let student = "";
+
+
 document.addEventListener("DOMContentLoaded", function () {
 
     createList();
-
+    
 // add button events ************************************************************************
     
     document.getElementById("buttonAdd").addEventListener("click", function () {
@@ -40,6 +43,8 @@ document.addEventListener("DOMContentLoaded", function () {
         studentArray.length,  // set ID
         document.getElementById("URL").value));
         document.location.href = "index.html#ListAll";
+       
+
         // also add the URL value
     });
 
@@ -57,6 +62,9 @@ document.addEventListener("DOMContentLoaded", function () {
     //     });
     // });
 
+    
+
+
     document.getElementById("buttonClear").addEventListener("click", function () {
         document.getElementById("name").value = "";
         document.getElementById("age").value = "";
@@ -70,10 +78,56 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 
+
+
+
+
+
+
+
+
+
+
+//SEARCH button 
+//return Student Name //Not Clickable
+
+    document.getElementById("buttonSearch").addEventListener("click", function() {
+        let searchTerm = document.getElementById("search").value;
+      
+        let filteredStudents = studentArray.filter(function(student) {
+          return student.StudentName.toLowerCase().includes(searchTerm.toLowerCase());
+        });
+      
+        let searchResultElement = document.getElementById("searchResult");
+        searchResultElement.innerHTML = "";
+      
+        if (filteredStudents.length > 0) {
+          filteredStudents.forEach(function(student) {
+            let listItem = document.createElement("li");
+            listItem.textContent = "student Name is : "+student.StudentName;
+            listItem.addEventListener("click", function() {
+             
+            });
+            searchResultElement.appendChild(listItem);
+          });
+        } else {
+          searchResultElement.textContent = "No matching students found.";
+        }
+      });
+
+
+
+
+
+
+      
+
     document.getElementById("buttonSortName").addEventListener("click", function () {
         studentArray.sort(dynamicSort("StudentName"));
         createList();
+        //new find function
         document.location.href = "index.html#ListAll";
+        
     });
 
     document.getElementById("buttonSortMajor").addEventListener("click", function () {
@@ -161,6 +215,8 @@ function createList() {
     });
 
 };
+
+
   
 
 /**
