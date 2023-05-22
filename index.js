@@ -1,4 +1,10 @@
+
+$(document).ready(function(){
+    $(":image");
+});
+
 // start by creating data so we don't have to type it in each time
+
 let studentArray = [];
 
 // define a constructor to create student objects
